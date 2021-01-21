@@ -31,20 +31,17 @@ export default class PicturesInfo extends Component {
       this.setState({ status: 'pending' });
       apiService
         .fetchPictures(nextRequest)
-        .then(
-          newPictures => {
-            if (newPictures.total !== 0) {
-              this.setState(prevState => ({
-                pictures: [...prevState.pictures, ...newPictures.hits],
-                status: 'resolved',
-              }));
-              console.log('`Картинки из фетча` : newPictures');
-              return;
-            }
-            return Promise.reject(new Error('Invalid request'));
-          },
-          // this.setState({ pictures: [...pictures.hits], status: 'resolved' })
-        )
+        .then(newPictures => {
+          if (newPictures.total !== 0) {
+            this.setState(prevState => ({
+              pictures: [...prevState.pictures, ...newPictures.hits],
+              status: 'resolved',
+            }));
+            console.log('`Картинки из фетча` : newPictures');
+            return;
+          }
+          return Promise.reject(new Error('Invalid request'));
+        })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
