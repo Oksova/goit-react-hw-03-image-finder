@@ -19,9 +19,12 @@ export default class PicturesInfo extends Component {
     const PrevPage = prevState.page;
     const NextPage = this.state.page;
     console.log(NextPage);
+    console.log(nextRequest);
+    console.log('componentDidUpdate PicturesInfo Start');
 
     if (PrevPage !== NextPage) {
       this.setState({ page: 1 });
+      console.log('PrevPage !== NextPage', this.setState);
     }
 
     if (prevRequest !== nextRequest || PrevPage !== NextPage) {
@@ -35,6 +38,7 @@ export default class PicturesInfo extends Component {
                 pictures: [...prevState.pictures, ...newPictures.hits],
                 status: 'resolved',
               }));
+              console.log('`Картинки из фетча` : newPictures');
               return;
             }
             return Promise.reject(new Error('Invalid request'));
@@ -44,11 +48,12 @@ export default class PicturesInfo extends Component {
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
+
   onLoadMore = () => {
-    console.log('Click onLoadMore');
     this.setState(prevState => ({
       page: prevState.page + 1,
     }));
+    console.log('Click onLoadMore after onLoadMore');
   };
 
   render() {

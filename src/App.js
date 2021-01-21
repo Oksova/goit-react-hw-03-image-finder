@@ -12,7 +12,7 @@ export default class App extends Component {
 
   handleSubmitForm = picturesName => {
     this.setState({ picturesName });
-    console.log('request handleSubmitForm ');
+    console.log('request handleSubmitForm App');
   };
 
   render() {

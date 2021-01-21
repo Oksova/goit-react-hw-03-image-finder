@@ -2,7 +2,9 @@ import { Component } from 'react';
 import './ButtonStyles.css';
 
 export default class Button extends Component {
-  scroll = () => this.props.onClick();
+  scroll = () => {
+    this.props.onClick();
+  };
 
   setTimeout =
     (() => {
@@ -11,7 +13,7 @@ export default class Button extends Component {
         behavior: 'smooth',
       });
     },
-    500);
+    300);
 
   render() {
     return (
