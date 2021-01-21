@@ -10,6 +10,7 @@ export default class SearchBar extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
   };
+
   handleNameChange = event => {
     this.setState({ input: event.currentTarget.value.toLowerCase() });
   };

@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './ButtonStyles.css';
+import PropTypes from 'prop-types';
 
 export default class Button extends Component {
   scroll = () => {
@@ -23,3 +24,6 @@ export default class Button extends Component {
     );
   }
 }
+Button.propTypes = {
+  onClick: PropTypes.func,
+};

@@ -4,6 +4,7 @@ import ImageGallery from '../ImageGallery/';
 import PicturesErrorView from '../PicturesErrorView/PicturesErrorView';
 import Loader from '../Loader/Loader';
 import Button from '../Button/Button';
+import PropTypes from 'prop-types';
 
 export default class PicturesInfo extends Component {
   state = {
@@ -22,15 +23,16 @@ export default class PicturesInfo extends Component {
     console.log(nextRequest);
     console.log('componentDidUpdate PicturesInfo Start');
 
-    if (PrevPage !== NextPage) {
+    if (prevRequest !== nextRequest) {
       this.setState({ page: 1 });
       console.log('PrevPage !== NextPage', this.setState);
+      console.log('page in check');
     }
 
     if (prevRequest !== nextRequest || PrevPage !== NextPage) {
       this.setState({ status: 'pending' });
       apiService
-        .fetchPictures(nextRequest)
+        .fetchPictures(nextRequest, NextPage)
         .then(newPictures => {
           if (newPictures.total !== 0) {
             this.setState(prevState => ({
@@ -50,14 +52,14 @@ export default class PicturesInfo extends Component {
     this.setState(prevState => ({
       page: prevState.page + 1,
     }));
-    console.log('Click onLoadMore after onLoadMore');
+    console.log('page');
   };
 
   render() {
     const { pictures, error, status, page } = this.state;
 
     if (status === 'idle') {
-      return <div>Введите свой запрос</div>;
+      return <h1>Введите свой запрос</h1>;
     }
     if (status === 'pending') {
       return <Loader />;
@@ -75,3 +77,8 @@ export default class PicturesInfo extends Component {
     }
   }
 }
+
+PicturesInfo.propTypes = {
+  message: PropTypes.string,
+  onClick: PropTypes.func,
+};
