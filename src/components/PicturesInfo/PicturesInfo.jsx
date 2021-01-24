@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import apiService from '../services/apiService';
+import apiService from '../../services/apiService';
 import ImageGallery from '../ImageGallery/';
 import PicturesErrorView from '../PicturesErrorView/PicturesErrorView';
 import Loader from '../Loader/Loader';
@@ -17,10 +17,8 @@ export default class PicturesInfo extends Component {
   componentDidUpdate(prevProps, prevState) {
     const prevRequest = prevProps.picturesName;
     const nextRequest = this.props.picturesName;
-    const PrevPage = prevState.page;
-    const NextPage = this.state.page;
-    console.log(NextPage);
-    console.log(nextRequest);
+    const prevPage = prevState.page;
+    const nextPage = this.state.page;
     console.log('componentDidUpdate PicturesInfo Start');
 
     if (prevRequest !== nextRequest) {
@@ -29,10 +27,10 @@ export default class PicturesInfo extends Component {
       console.log('page in check');
     }
 
-    if (prevRequest !== nextRequest || PrevPage !== NextPage) {
+    if (prevRequest !== nextRequest || prevPage !== nextPage) {
       this.setState({ status: 'pending' });
       apiService
-        .fetchPictures(nextRequest, NextPage)
+        .fetchPictures(nextRequest, nextPage)
         .then(newPictures => {
           if (newPictures.total !== 0) {
             this.setState(prevState => ({

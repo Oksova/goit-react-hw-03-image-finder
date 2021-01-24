@@ -5,16 +5,13 @@ import PropTypes from 'prop-types';
 export default class Button extends Component {
   scroll = () => {
     this.props.onClick();
-  };
-
-  setTimeout =
-    (() => {
+    setTimeout(() => {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: 'smooth',
       });
-    },
-    300);
+    }, 1200);
+  };
 
   render() {
     return (
@@ -24,6 +21,7 @@ export default class Button extends Component {
     );
   }
 }
+
 Button.propTypes = {
   onClick: PropTypes.func,
 };
